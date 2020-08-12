@@ -1,0 +1,60 @@
+<div class="container-fluid col-md-6">
+  <h3 class="text-center lead">Add Member to Racing Team</h3>
+  <br/>
+  <!--Template Driven Form or Model Driven Form?-->
+  <form [formGroup]="memberForm" (ngSubmit)="onSubmit(memberForm)">
+    <div>
+      <div class="row">
+        <div class="col-md-6">
+          <input
+                  type="text"
+                  class="form-control"
+                  formControlName="firstName"
+                  placeholder="First Name"
+          />
+        </div>
+        <div class="col-md-6">
+          <input
+                  type="text"
+                  class="form-control"
+                  formControlName="lastName"
+                  placeholder="Last Name"
+          />
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-md-6">
+          <input
+                  type="text"
+                  class="form-control"
+                  formControlName="jobTitle"
+                  placeholder="Job Title"
+          />
+        </div>
+        <!--We may have to make a service call to get this list-->
+        <div class="col-md-6">
+          <select formControlName="team" class="custom-select">
+            <option *ngFor="let team of teams">{{ team.teamName }}</option>
+          </select>
+        </div>
+      </div>
+      <br/>
+      <div class="form-group col-md-12">
+        <div class="row">
+          <label id="activeStatus" class="md-check col-md-4 lead">
+            <input type="radio" value="Active" formControlName="status"/> Active
+          </label>
+          <label id="inactiveStatus" class="md-check col-md-4 lead">
+            <input type="radio" value="Inactive" formControlName="status"/> Inactive
+          </label>
+        </div>
+      </div>
+    </div>
+    <!--Disable if form is invalid-->
+    <button type="submit" class="btn btn-primary pull-right"
+      [disabled]="memberForm.pristine || memberForm.invalid || submitted">
+      Save Member
+    </button>
+  </form>
+</div>
